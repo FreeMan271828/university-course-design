@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.freeman.ticketmanager.mapper.TicketLogMapper">
+
+    <!-- 定义 ResultMap，处理字段映射和 JSON 转换 -->
+    <resultMap id="BaseResultMap" type="org.freeman.ticketmanager.entity.TicketLog">
+        <id column="id" property="id" />
+        <result column="ticket_id" property="ticketId" />
+        <result column="operator_id" property="operatorId" />
+        <result column="action" property="action" />
+        <result column="created_at" property="createdAt" />
+        <result column="details" property="details"
+                typeHandler="org.freeman.ticketmanager.config.JsonTypeHandler"/>
+        <result column="operator_name" property="operatorName" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, ticket_id, operator_id, action, details, created_at
+    </sql>
+
+    <!-- 插入操作 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_ticket_log (
+            ticket_id,
+            operator_id,
+            action,
+            details,
+            created_at
+        ) VALUES (
+                     #{ticketId},
+                     #{operatorId},
+                     #{action},
+                     #{details, typeHandler=org.freeman.ticketmanager.config.JsonTypeHandler}::jsonb,
+                     COALESCE(#{createdAt}, CURRENT_TIMESTAMP)
+                 )
+    </insert>
+
+    <!-- 查询操作（包含动态过滤） -->
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT
+        t.id,
+        t.ticket_id,
+        t.operator_id,
+        t.action,
+        t.details,
+        t.created_at,
+        u.username AS operator_name
+        FROM t_ticket_log t
+        LEFT JOIN sys_user u ON t.operator_id = u.id
+        <where>
+            <if test="id != null">
+                AND t.id = #{id}
+            </if>
+            <if test="ticketId != null">
+                AND t.ticket_id = #{ticketId}
+            </if>
+            <if test="operatorId != null">
+                AND t.operator_id = #{operatorId}
+            </if>
+            <if test="action != null">
+                AND t.action = #{action}
+            </if>
+        </where>
+        ORDER BY t.created_at DESC
+    </select>
+
+</mapper>

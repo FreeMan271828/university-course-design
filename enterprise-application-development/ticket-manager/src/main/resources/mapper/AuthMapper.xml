@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.freeman.ticketmanager.mapper.AuthMapper">
+    <resultMap id="UserDetailMap" type="org.freeman.ticketmanager.common.UserDetail">
+        <id property="userId" column="id"/>
+        <result property="username" column="username"/>
+        <collection property="roles" ofType="string">
+            <result column="role_code"/>
+        </collection>
+    </resultMap>
+
+    <!-- 1. 校验用户名是否存在 -->
+    <select id="countByUsername" resultType="int">
+        SELECT count(1) FROM sys_user WHERE username = #{username}
+    </select>
+
+    <!-- 2. 插入用户 -->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sys_user (username, password, real_name, is_active, email)
+        VALUES (#{username}, #{password}, #{realName}, true, #{email})
+    </insert>
+
+    <!-- 3. 根据 Code 查 Role ID -->
+    <select id="selectRoleIdByCode" resultType="java.lang.Long">
+        SELECT id FROM sys_role WHERE code = #{code}
+    </select>
+
+    <select id="selectUserWithName" resultMap="UserDetailMap">
+        SELECT
+            u.id,
+            u.username,
+            u.real_name,
+            u.email,
+            r.code AS role_code
+        FROM sys_user u
+                 LEFT JOIN sys_user_role ur ON u.id = ur.user_id
+                 LEFT JOIN sys_role r ON ur.role_id = r.id
+        WHERE u.username = #{username}
+    </select>
+
+    <select id="selectUserList" resultType="org.freeman.ticketmanager.entity.User">
+        SELECT DISTINCT
+        u.id,
+        u.username,
+        u.email,
+        u.real_name AS realName,
+        u.is_active AS isActive,
+        u.created_at AS createdAt
+        FROM sys_user u
+        LEFT JOIN sys_user_role ur ON u.id = ur.user_id
+        LEFT JOIN sys_role r ON ur.role_id = r.id
+        <where>
+            <!-- 1. 角色权限过滤 -->
+            <if test="roleFilter != null and roleFilter != ''">
+                AND r.code = #{roleFilter}
+            </if>
+
+            <!-- 2. 名称关键字搜索 (用户名 OR 真实姓名) -->
+            <if test="keyword != null and keyword != ''">
+                AND (
+                u.username LIKE CONCAT('%', #{keyword}, '%')
+                OR
+                u.real_name LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+        ORDER BY u.id ASC
+    </select>
+
+    <select id="selectByUserId" resultType="org.freeman.ticketmanager.entity.User">
+        SELECT * FROM sys_user u
+        WHERE u.id = #{userId}
+    </select>
+
+    <select id="selectUsersByName" resultType="org.freeman.ticketmanager.entity.User">
+        select * from sys_user u
+        <where>
+            <if test="name != null">
+                u.username = #{name}
+            </if>
+        </where>
+    </select>
+
+    <!-- 4. 插入用户角色关联 -->
+    <insert id="insertUserRole">
+        INSERT INTO sys_user_role (user_id, role_id) VALUES (#{userId}, #{roleId})
+    </insert>
+</mapper>

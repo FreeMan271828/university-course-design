@@ -1,0 +1,45 @@
+isTest: true
+
+ticket:
+  sla:
+    response-notice-minutes: 60 # 响应剩余时间小于60分钟预警
+    resolve-notice-minutes: 30  # 解决剩余时间小于30分钟预警
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://118.89.136.119:10012/t-ticket
+  data:
+    redis:
+      host: 118.89.136.119
+      password: 123456
+      port: 10021
+  mail:
+    host: smtp.qq.com
+    username: 1114509193@qq.com
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+    password: vldctzjimfhzidje
+
+mybatis:
+  mapper-locations: classpath:/mapper/*xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+springdoc:
+  swagger-ui:
+    # 修改Swagger UI路径
+    path: /swagger
+    # 开启Swagger UI界面
+    enabled: true
+  api-docs:
+    # 修改api-docs路径
+    path: /v3/api-docs
+    # 开启api-docs
+    enabled: true

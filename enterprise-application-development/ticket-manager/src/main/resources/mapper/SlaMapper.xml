@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.freeman.ticketmanager.mapper.SlaMapper">
+    <select id="selectAll" resultType="org.freeman.ticketmanager.entity.SlaPolicy">
+        SELECT * FROM sys_sla_policy
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_sla_policy (priority, response_hours, resolve_hours)
+        VALUES (#{priority}, #{responseHours}, #{resolveHours})
+    </insert>
+
+    <update id="update">
+        UPDATE sys_sla_policy
+        SET response_hours = #{responseHours}, resolve_hours = #{resolveHours}
+        WHERE priority = #{priority}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM sys_sla_policy WHERE priority = #{priority}
+    </delete>
+</mapper>

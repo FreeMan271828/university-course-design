@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.freeman.ticketmanager.mapper.TicketMapper">
+
+    <resultMap id="TicketMap" type="org.freeman.ticketmanager.entity.Ticket">
+        <id property="id" column="id"/>
+        <result property="serialNo" column="serial_no"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <result property="priority" column="priority"/>
+        <result property="status" column="status"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="category" column="category_name"/>
+        <result property="responseDeadline" column="response_deadline"/>
+        <result property="resolveDeadline" column="resolve_deadline"/>
+        <result property="responseAt" column="first_response_at"/>
+        <result property="resolveAt" column="resolved_at"/>
+        <result property="creatorId" column="creator_id"/>
+        <result property="assigneeId" column="assignee_id"/>
+        <result property="createdAt" column="created_at"/>
+        <result column="creator_name" property="creatorName"/>
+        <result column="assignee_name" property="assigneeName"/>
+
+        <result property="customFields" column="custom_fields"
+                typeHandler="org.freeman.ticketmanager.config.JsonTypeHandler"/>
+    </resultMap>
+
+    <!-- === 变动 2: 在查询列表中增加分类表的名字 === -->
+    <sql id="Base_Column_List">
+        t.*,
+        u1.real_name as creator_name,
+        u2.real_name as assignee_name,
+        c.name as category_name
+    </sql>
+
+    <!-- 动态列表查询 -->
+    <select id="selectList" resultMap="TicketMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_ticket t
+        LEFT JOIN sys_user u1 ON t.creator_id = u1.id
+        LEFT JOIN sys_user u2 ON t.assignee_id = u2.id
+        <!-- === 变动 3: 增加分类表的关联 === -->
+        LEFT JOIN t_category c ON t.category_id = c.id
+        <where>
+            <if test="creatorId != null">
+                AND t.creator_id = #{creatorId}
+            </if>
+            <if test="assigneeId != null">
+                AND t.assignee_id = #{assigneeId}
+            </if>
+            <!-- 如果需要按分类ID筛选 -->
+            <if test="categoryId != null">
+                AND t.category_id = #{categoryId}
+            </if>
+            <if test="status != null and status != ''">
+                AND t.status = #{status}
+            </if>
+        </where>
+        ORDER BY t.created_at DESC
+    </select>
+
+    <update id="updateStatus">
+        UPDATE t_ticket
+        <set>
+            status = #{ticket.status},
+            assignee_id = #{ticket.assigneeId},
+            updated_at = NOW(),
+            <if test="responseAt != null">
+                first_response_at = #{responseAt},
+            </if>
+            <if test="resolveAt != null">
+                resolved_at = #{resolveAt},
+            </if>
+        </set>
+        WHERE id = #{ticket.id}
+    </update>
+
+    <update id="updateAssignee">
+        UPDATE t_ticket SET assignee_id = #{assigneeId}
+        WHERE id = #{ticket.id}
+    </update>
+
+    <!-- === 变动 4: 插入时保存 category_id 而不是 category 字符串 === -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_ticket (
+            serial_no, title, priority, status, custom_fields,
+            response_deadline, resolve_deadline, creator_id, description, category_id, assignee_id
+        ) VALUES (
+                     #{serialNo}, #{title}, #{priority}, #{status},
+                     #{customFields, typeHandler=org.freeman.ticketmanager.config.JsonTypeHandler},
+                     #{responseDeadline}, #{resolveDeadline}, #{creatorId}, #{description}, #{categoryId}, #{assigneeId}
+                 )
+    </insert>
+
+    <select id="selectSlaPolicy" resultType="org.freeman.ticketmanager.entity.SlaPolicy">
+        SELECT * FROM sys_sla_policy WHERE priority = #{priority}
+    </select>
+
+    <select id="selectById" resultMap="TicketMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_ticket t
+        LEFT JOIN sys_user u1 ON t.creator_id = u1.id
+        LEFT JOIN sys_user u2 ON t.assignee_id = u2.id
+        LEFT JOIN t_category c ON t.category_id = c.id
+        WHERE t.id = #{id}
+    </select>
+
+    <select id="selectApproachingTickets" resultMap="TicketMap">
+        SELECT * FROM t_ticket
+        WHERE
+            status NOT IN ('RESOLVED', 'CLOSED')
+          AND assignee_id IS NOT NULL
+          AND (
+            -- 逻辑：响应即将超时 或 解决即将超时
+            (first_response_at IS NULL AND response_deadline &lt; #{responseThreshold})
+                OR
+            (resolve_deadline &lt; #{resolveThreshold})
+            )
+    </select></mapper>
