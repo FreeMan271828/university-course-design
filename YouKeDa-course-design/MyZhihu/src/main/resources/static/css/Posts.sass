@@ -1,0 +1,276 @@
+p
+    margin: 0px
+    padding: 0px
+.posts
+    width: 684px
+    border-radius: 2px 2px 2px 2px
+    padding-left: 15px
+    background: #ffffff
+    padding-bottom: 20px
+    margin-bottom: 10px
+    padding-right: 30px
+    .title
+        padding-top: 20px
+        height: 22px
+        font-family: PingFang SC
+        font-weight: bold
+        font-size: 16px
+        line-height: 22px
+        text-align: left
+        font-style: normal
+        text-transform: none
+        margin-bottom: 12px
+    .main
+        display: flex
+        .photo
+            width: 190px
+            height: 105px
+            background: #87CEFA
+            margin-right: 16px
+        .right
+            .text
+                width: 433px
+                font-size: 14px
+                color: #1C1C1C
+                line-height: 22px
+                text-align: left
+                font-style: normal
+                text-transform: none
+                overflow: hidden
+                text-overflow: ellipsis
+                display: -webkit-box
+                -webkit-line-clamp: 2
+                -webkit-box-orient: vertical
+                margin-bottom: 6px
+            button
+                align-items: center
+                background: #ffffff
+                width: 75px
+                font-family: PingFang SC, PingFang SC
+                font-weight: normal
+                font-size: 14px
+                color: #005DB5
+                line-height: 22px
+                text-align: left
+                font-style: normal
+                text-transform: none
+                margin-right: 6px
+    .date-full
+        height: 22px
+        font-family: PingFang SC, PingFang SC
+        font-weight: normal
+        font-size: 14px
+        color: #8790A4
+        line-height: 22px
+        text-align: left
+        font-style: normal
+        text-transform: none
+        display: none
+    .footer
+        display: flex
+        margin-top: 20px
+        align-items: center
+        button
+            border: none
+            background: #ffffff
+            height: 22px
+            p
+                font-family: PingFang SC, PingFang SC
+                font-weight: normal
+                font-size: 14px
+                color: #888FA2
+                line-height: 22px
+                text-align: left
+                font-style: normal
+                text-transform: none
+        .patronize
+            width: 91px
+            height: 30px
+            font-family: PingFang SC, PingFang SC
+            font-weight: normal
+            font-size: 14px
+            color: #426BED
+            background: #E8EFFC
+            line-height: 22px
+            text-align: left
+            font-style: normal
+            text-transform: none
+            margin-right: 4px
+            text-align: center
+        .unapprove
+            width: 33px
+            height: 30px
+            font-family: PingFang SC, PingFang SC
+            font-weight: normal
+            font-size: 14px
+            color: #426BED
+            background: #E8EFFC
+            line-height: 22px
+            text-align: left
+            font-style: normal
+            text-transform: none
+            margin-right: 24px
+            background: #E8EFFC
+            text-align: center
+        .comment
+            margin-right: 16px
+            .comments
+                font-family: PingFang SC, PingFang SC
+                font-weight: normal
+                font-size: 14px
+                color: #888FA2
+                line-height: 22px
+                text-align: left
+                font-style: normal
+                text-transform: none
+        button:nth-child(n+4):nth-child(-n+6)
+            margin-right: 16px
+            display: none
+        .date-mini
+            height: 22px
+            font-family: PingFang SC, PingFang SC
+            font-weight: normal
+            font-size: 14px
+            color: #888FA2
+            line-height: 22px
+            text-align: left
+            font-style: normal
+            text-transform: none
+        .put-away
+            margin-left: auto
+            display: none
+            p
+                height: 22px
+                font-family: PingFang SC, PingFang SC
+                font-weight: normal
+                font-size: 16px
+                color: #888FA2
+                line-height: 22px
+                text-align: left
+                font-style: normal
+                text-transform: none
+    .comments-replies
+        z-index: 4
+        width: 708px
+        position: fixed
+        left: 50%
+        margin-left: -354px
+        top: 50%
+        margin-top: var(--element-halfHeight)
+        display: none
+        background: #FFFFFF
+        border-radius: 0px 0px 0px 0px
+        .head
+            display: flex
+            justify-content: space-between
+            border-bottom: 1px solid #F1F1F1
+            .title
+                padding-left: 20px
+            .delete
+                width: 52px
+                height: 52px
+                background: url("/picture/delete.png")
+                background-repeat: no-repeat
+                background-size: contain
+                background-position: center
+                right: -20px
+        .comment-reply
+            padding-left: 20px
+            border-bottom: 1px solid #F1F1F1
+            padding-top: 22px
+            padding-right: 20px
+            .baseInfo
+                display: flex
+                justify-content: space-between
+                .author
+                    font-family: PingFang SC, PingFang SC
+                    font-weight: bold
+                    font-size: 14px
+                    color: #000000
+                    line-height: 22px
+                    text-align: left
+                    font-style: normal
+                    text-transform: none
+                    padding-bottom: 10px
+                    display: flex
+                    .userPicture
+                        width: 20px;
+                        height: 20px;
+                        background: url("/picture/DefaultUserPicture.jpg")
+                        background-repeat: no-repeat
+                        background-size: contain
+                        background-position: center
+                        margin-right: 8px
+                .time
+                    font-family: PingFang SC, PingFang SC
+                    font-weight: normal
+                    font-size: 14px
+                    color: #888FA2
+                    line-height: 22px
+                    text-align: left
+                    font-style: normal
+                    text-transform: none
+            .content
+                width: 100%
+                font-family: PingFang SC, PingFang SC
+                font-weight: normal
+                font-size: 14px
+                color: #000000
+                line-height: 22px
+                text-align: left
+                font-style: normal
+                text-transform: none
+                padding-bottom: 10px
+            .comment-footer
+                font-family: PingFang SC, PingFang SC
+                font-weight: normal
+                font-size: 14px
+                color: #888FA2
+                line-height: 22px
+                text-align: left
+                font-style: normal
+                text-transform: none
+                padding-bottom: 15px
+                button
+                    width: 30px
+                    color: #426BED
+                    background: #E8EFFC
+                    margin-right: 20px
+                .comment-approve
+                .comment-unapprove
+                .comment-favorite
+                .comment-share
+            .reply
+                padding-top: 10px
+                padding-left: 1.875rem
+                border-top: 1px solid #F1F1F1
+                .author
+                    display: flex
+                    .userPicture
+                        width: 20px;
+                        height: 20px;
+                        background: url("/picture/DefaultUserPicture.jpg")
+                        background-repeat: no-repeat
+                        background-size: contain
+                        background-position: center
+                        margin-right: 8px
+                .content
+        .write-input
+            height: 64px
+            display: flex
+            justify-content: space-around
+            align-items: center
+            input
+                width: 578px
+                height: 36px
+                border: none
+            button
+                width: 60px;
+                height: 36px;
+                color: white
+                background: #0084FF;
+                border-radius: 2px 2px 2px 2px;
+                opacity: 0.5;
+            input:focus
+                border: 2px solid #87CEFA
+                outline: none

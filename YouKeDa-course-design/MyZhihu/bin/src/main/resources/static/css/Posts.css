@@ -1,0 +1,191 @@
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.posts {
+  width: 684px;
+  border-radius: 2px 2px 2px 2px;
+  padding-left: 15px;
+  background: #ffffff;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  padding-right: 30px;
+}
+
+.posts .title {
+  padding-top: 20px;
+  height: 22px;
+  font-family: PingFang SC;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+  margin-bottom: 12px;
+}
+
+.posts .main {
+  display: flex;
+}
+
+.posts .main .photo {
+  width: 190px;
+  height: 105px;
+  background: #87CEFA;
+  margin-right: 16px;
+}
+
+.posts .main .right .text {
+  width: 433px;
+  font-size: 14px;
+  color: #1C1C1C;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 6px;
+}
+
+.posts .main .right button {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  width: 75px;
+}
+
+.posts .main .right button .text {
+  font-family: PingFang SC, PingFang SC;
+  font-weight: normal;
+  font-size: 14px;
+  color: #005DB5;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+  margin-right: 6px;
+}
+
+.posts .date-full {
+  height: 22px;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: normal;
+  font-size: 14px;
+  color: #8790A4;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+  display: none;
+}
+
+.posts .footer {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.posts .footer button {
+  border: none;
+  background: #ffffff;
+  height: 22px;
+}
+
+.posts .footer button p {
+  font-family: PingFang SC, PingFang SC;
+  font-weight: normal;
+  font-size: 14px;
+  color: #888FA2;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+
+.posts .footer .patronize {
+  width: 91px;
+  height: 30px;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: normal;
+  font-size: 14px;
+  color: #426BED;
+  background: #E8EFFC;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+  margin-right: 4px;
+  text-align: center;
+}
+
+.posts .footer .unapprove {
+  width: 33px;
+  height: 30px;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: normal;
+  font-size: 14px;
+  color: #426BED;
+  background: #E8EFFC;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+  margin-right: 24px;
+  background: #E8EFFC;
+  text-align: center;
+}
+
+.posts .footer .comment {
+  margin-right: 16px;
+}
+
+.posts .footer .comment .comments {
+  font-family: PingFang SC, PingFang SC;
+  font-weight: normal;
+  font-size: 14px;
+  color: #888FA2;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+
+.posts .footer button:nth-child(n+4):nth-child(-n+6) {
+  margin-right: 16px;
+  display: none;
+}
+
+.posts .footer .date-mini {
+  height: 22px;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: normal;
+  font-size: 14px;
+  color: #888FA2;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+
+.posts .footer .put-away {
+  margin-left: auto;
+  display: none;
+}
+
+.posts .footer .put-away p {
+  height: 22px;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: normal;
+  font-size: 16px;
+  color: #888FA2;
+  line-height: 22px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="../HomePage.html">
+    <div class="posts" th:fragment="posts-box" th:each="post,it:${posts}">
+        <p class="title" th:text="${post.title}"></p>
+        <div class="main">
+            <img class="photo" th:src="${post.photo}">
+            <div class="right">
+                <div class="text">
+            <strong>[[${post.user.name}]]:</strong>[[${post.content}]]
+                </div>
+                <button class="expand">
+                    <div class="text">阅读全文</div>
+                </button>
+            </div>
+        </div> 
+        <div class="date-full">编辑于[[${post.date.year}]]-[[${post.date.month}]]-[[${post.date.day}]] [[${post.date.hour}]]:[[${post.date.minute}]]</div>
+        <div class="footer">
+            <form method="post" action="/zhihu/addFavor">
+                <input name="postId" type="hidden" th:value="${post.id}">
+                <button class="patronize">赞[[${post.favorNum}]]</button>
+            </form>
+            <button class="unapprove">
+                <div class="text">踩</div>
+            </button>
+            <button class="comment">
+                <div class="logo"></div>
+                <input class="commentsData" type="hidden" value="${post.comments}">
+                <div class="comments"></div>
+            </button>
+            <button class="favorite">
+                <div class="logo"></div>
+                <p>收藏</p>
+            </button>
+            <button class="share">
+                <div class="logo"></div>
+                <p>分享</p>
+            </button>
+            <button class="report">
+                <div class="logo"></div>
+                <p>举报</p>
+            </button>
+            <div class="date-mini">[[${post.date.month}]]-[[${post.date.day}]]</div>
+            <button class="put-away">
+                <p>收起</p>
+                <div class="photo"></div>
+            </button>
+        </div>
+    </div>
+
+</html>

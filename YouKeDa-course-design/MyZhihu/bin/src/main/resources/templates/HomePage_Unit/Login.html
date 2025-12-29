@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="../HomePage.html">
+
+    <div th:fragment="login-box">
+        <div class="quit-box"></div>
+        <div class="title">
+            <span>密码登录</span>
+        </div>
+
+        <form class="login-input" action="/zhihu/register" method="post" name="user">
+            <div>
+                <input type="text" autocomplete="off" placeholder="手机号或邮箱" name="name" required class="input-name"/>
+            </div>
+
+            <div>
+                <input type="password" autocomplete="off" placeholder="密码" name="password" required
+                    maxlength="32" class="input-password"/>
+            </div>
+
+            <!--登入按钮-->
+            <button type="submit" class="login-button">注册/登录</button>
+        </form>
+        <div class="floor">
+            未注册手机验证后自动登录，注册即代表同意《知乎协议》《隐私保护指引》
+        </div>
+    </div>
+
+</html>

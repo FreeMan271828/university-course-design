@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首页</title>
+    <link rel="stylesheet" href="/css/Header.css" />
+    <link rel="stylesheet" href="/css/HeaderLogSuccess.css" />
+    <link rel="stylesheet" href="/css/Posts.css">
+    <link rel="stylesheet" href="/css/Homepage.css">
+    <link rel="stylesheet" href="/css/SideBox.css">
+    <link rel="stylesheet" href="/css/login.css">
+  </head>
+
+  <body>
+    
+    <!--头部-->
+    <div
+      class="header-box"
+      th:insert="~{/unit/HeaderLogSuccess::header-log-success-box}"></div>
+
+    <!--导航栏-->
+    <div class="nav-box" th:insert="~{/unit/HeaderLogSuccess::nav-box}"></div>
+
+    <div class="homepage-main">
+      <!--帖子区-->
+      <div class="posts-box" th:insert="~{/homepage_unit/Posts::posts-box}"></div>
+      <!--侧栏-->
+      <div class="side-box">
+          <div class="search-find" th:insert="~{/unit/SideBox::search-find}"></div>
+          <div class="infoes-box" th:insert="~{/unit/SideBox::infoes-box}"></div>
+      </div>
+    </div>
+
+    <!--登录-->
+    <div class="login-box" th:insert="~{/unit/Login::login-box}"></div>
+    <!--蒙层-->
+    <div class="mask"></div>
+    <div class="homepage-footer">
+      <!--回到首页-->
+      <div class="back-to-end"></div>
+    </div>
+  
+  </body>
+  
+  <script src="/js/Header.js"></script>
+  <script src="/js/Posts.js"></script>
+  <script src="/js/HomePage.js"></script>
+  <script src="/js/Login.js"></script>
+</html>

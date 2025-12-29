@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+
+<div class="search-find" th:fragment="search-find">
+    <div class="title">
+        探索发现
+    </div>
+    <div class="border"></div>
+    <div class="hot-searches" th:each="search:${hotSearches}">
+        <button>[[${search.title}]]</button>
+        <div class="fire"></div>
+    </div>
+</div>
+
+<div class="infoes-box" th:fragment="infoes-box">
+    <ul class="relate-info" th:each="info:${infoes}">
+        <div>[[${info}]]</div>
+    </ul>
+</div>
+
+</html>

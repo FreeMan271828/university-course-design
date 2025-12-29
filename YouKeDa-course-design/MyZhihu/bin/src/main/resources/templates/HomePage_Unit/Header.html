@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="../HomePage.html">
+  
+  <div class="header" th:fragment="header-box">
+    <div class="logo-box"></div>
+    <ul class="function-box">
+      <button>首页</button>
+      <button>会员</button>
+      <button>发现</button>
+      <button>等你来答</button>
+    </ul>
+    <div class="search-box">
+      <div class="search">
+        <input class="search-input" type="text" />
+        <button>
+          <div class="searchlogo"></div>
+        </button>
+      </div>
+      <ul class="searchResult">
+        <li><span>奥密克戎变异</span></li>
+        <li><span>奥密克戎变异</span>变异株ba.2进化分支</li>
+        <li><span>奥密克戎变异</span>株</li>
+        <li><span>奥密克戎变异</span>株潜伏期</li>
+        <li><span>奥密克戎变异</span>毒株有多厉害</li>
+        <a>查看「奥密克戎变异」的搜索结果</a>
+      </ul>
+    </div>
+    <div class="right-box">
+      <button class="barrier-free">
+        <div class="logo"></div>
+        <div class="text">无障碍</div>
+      </button>
+      <button class="login">登录</button>
+    </div>
+  </div>
+
+  <div th:fragment="nav-box" class="nav">
+    <ul>
+      <button>综合</button>
+      <button>用户</button>
+      <button>话题</button>
+      <button>视频</button>
+      <button>学术</button>
+      <button>专栏</button>
+      <button>严选内容</button>
+      <button>电子书</button>
+      <button>圈子</button>
+    </ul>
+  </div>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+    <div th:fragment="posts-box">
+        <div class="posts" th:each="post,it:${posts}">
+            <p class="title" th:text="${post.title}"></p>
+            <div class="main">
+                <img class="photo" th:src="${post.photo}">
+                <div class="right">
+                    <div class="text">
+                <strong>[[${post.user.name}]]:</strong>[[${post.content}]]
+                    </div>
+                    <button class="expand">阅读全文
+                    </button>
+                </div>
+            </div> 
+            <div class="date-full">编辑于[[${post.date.year}]]-[[${post.date.month}]]-[[${post.date.day}]] [[${post.date.hour}]]:[[${post.date.minute}]]</div>
+            <div class="footer">
+                <form method="post" action="/zhihu/addFavor">
+                    <input name="postId" type="hidden" th:value="${post.id}">
+                    <input name="userId" type="hidden">
+                    <button class="patronize">赞[[${post.favorNum}]]</button>
+                </form>
+                <button class="unapprove">
+                    <div class="text">踩</div>
+                </button>
+                <button class="comment">
+                    <div class="logo"></div>
+                    <input class="commentNumData" type="hidden" value="${post.comments}">
+                    <div class="commentNum"></div>
+                </button>
+                <button class="favorite">
+                    <div class="logo"></div>
+                    <p>收藏</p>
+                </button>
+                <button class="share">
+                    <div class="logo"></div>
+                    <p>分享</p>
+                </button>
+                <button class="report">
+                    <div class="logo"></div>
+                    <p>举报</p>
+                </button>
+                <div class="date-mini">[[${post.date.month}]]-[[${post.date.day}]]</div>
+                <button class="put-away">
+                    <p>收起</p>
+                    <div class="photo"></div>
+                </button>
+            </div>
+            <!--评论-->
+            <div class="comments-replies">
+                <div class="head">
+                    <div class="title">评论</div>
+                    <button class="delete"></button>
+                </div>
+                <div class="comment-reply" th:each="comment:${post.comments}">
+                    <div class="baseInfo">
+                        <div class="author">
+                            <div class="userPicture"></div>
+                            [[${comment.user.name}]]
+                        </div>
+                        <div class="time">[[${comment.date.month}]]-[[${comment.date.day}]]</div>
+                    </div>
+                    <div class="content">[[${comment.content}]]</div>
+                    <div class="comment-footer">
+                        <button class="comment-approve">
+                            <div class="text">赞[[${comment.favorNum}]]</div>
+                        </button>
+                        <button class="comment-unapprove">
+                            <div class="text">踩</div>
+                        </button>
+                        <button class="commment-favorite">
+                            <div class="logo"></div>
+                            <p>收藏</p>
+                        </button>
+                        <button class="comment-share">
+                            <div class="logo"></div>
+                            <p>分享</p>
+                        </button>
+                    </div>
+                    <div class="reply" th:each="reply:${comment.replies}">
+                        <div class="baseInfo">
+                            <div class="author">
+                                <div class="userPicture"></div>
+                                [[${reply.user.name}]]
+                            </div>
+                            <div class="time">[[${reply.date.month}]]-[[${reply.date.day}]]</div>
+                        </div>
+                        <div class="content">[[${reply.content}]]</div>
+                    </div>
+                </div>
+                <form class="write-input" action="/zhihu/addComment" method="post">
+                    <input class="data" placeholder="写下你的评论" type="text" name="content">
+                    <input type="hidden" name="postId" th:value="${post.id}">
+                    <input type="hidden" name="userId" th:value="${param.userId}">
+                    <button type="submit">发布</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</html>
